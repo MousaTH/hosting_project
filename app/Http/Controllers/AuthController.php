@@ -16,7 +16,7 @@ class AuthController extends Controller{
             'name' => 'required|string',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'phone_number'=> 'nullable|string|max:10'
+            // 'phone_number'=> 'nullable|string|max:10'
         ]);
 
         $user = User::create([
@@ -25,7 +25,7 @@ class AuthController extends Controller{
             'name' => $Data['name'],
             'email' => $Data['email'],
             'password' => $Data['password'],
-            'phone_number' => $Data['phone_number']
+            // 'phone_number' => $Data['phone_number']
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
