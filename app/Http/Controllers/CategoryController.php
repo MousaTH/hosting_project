@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class CategoryController extends Controller
 {
@@ -42,7 +44,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $categ = DB::table('categories')->findOrFail($id);
+        $validated = $request->validate([
+            'category_name'=>'required|string',
+            'category_icon'=>'required|string',
+        ]);
+        $categ->update($validated);
+        return response()->json([
+            'message' => 'Category updated successfully',
+            'category' => $categ
+        ],200);
     }
 
     /**
