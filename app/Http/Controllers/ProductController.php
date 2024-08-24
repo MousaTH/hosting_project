@@ -31,7 +31,7 @@ class ProductController extends Controller
             'name_of_product' => 'required|string|max:255',
             'description_of_product' => 'nullable|string',
             //  'image_of_product' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'categories_id' =>'required|numeric|exists:categories,id',
+            'categories_id' =>'required|numeric|exists:category,id',
         ]);
 //        if ($request->hasFile('image')) {
 //            $imagePath = $request->file('image')->store('products', 'public');
@@ -60,6 +60,7 @@ class ProductController extends Controller
             'name_of_product' => 'required|string|max:255',
             'description_of_product' => 'nullable|string',
             'image_of_product' => 'nullable|string',
+            'categories_id'=>'required|numeric|exists:category,id'
         ]);
         $product->update($validated);
         return response()->json($product,201);
