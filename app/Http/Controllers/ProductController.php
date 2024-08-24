@@ -13,13 +13,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('categories')->get();
+        $products = Product::with('category')->get();
         return response ()->json($products);
 
     }
     public function create(){
         $categories = Category::all();
-        return view('home',compact('categories'));
+        return view('home',compact('category'));
     }
     /**
      * Store a newly created resource in storage.
@@ -31,7 +31,7 @@ class ProductController extends Controller
             'name_of_product' => 'required|string|max:255',
             'description_of_product' => 'nullable|string',
             //  'image_of_product' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'categories_id' =>'required|numeric|exists:category,id',
+            'categories_id' =>'required|numeric',
         ]);
 //        if ($request->hasFile('image')) {
 //            $imagePath = $request->file('image')->store('products', 'public');
@@ -60,7 +60,7 @@ class ProductController extends Controller
             'name_of_product' => 'required|string|max:255',
             'description_of_product' => 'nullable|string',
             'image_of_product' => 'nullable|string',
-            'categories_id'=>'required|numeric|exists:category,id'
+            'categories_id'=>'required|numeric'
         ]);
         $product->update($validated);
         return response()->json($product,201);
@@ -79,7 +79,7 @@ class ProductController extends Controller
             "name_of_product"=>'required|string|max:255',
             'description_of_product'=>'nullable|string',
             'image_of_product'=>'nullable|string',
-            'categories_id' =>'required|numeric|exists:categories,id',
+            'categories_id' =>'required|numeric',
         ]);
         $products = Product::create($validateData);
         return response()->json($products,201);
