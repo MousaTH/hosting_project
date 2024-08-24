@@ -44,7 +44,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $categ = DB::table('categories')->findOrFail($id);
+        $categ = Category::findOrFail($id);
         $validated = $request->validate([
             'category_name'=>'required|string',
             'category_icon'=>'required|string',
