@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://glacial-depths-85419-a9bb2bb65cfe.herokuapp.com'),
 
     /*
     |--------------------------------------------------------------------------
