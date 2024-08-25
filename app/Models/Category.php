@@ -10,7 +10,7 @@ class Category extends Model
     use HasFactory;
     protected $table = 'category';  // this will override the default 'categories' table name in the database.
     protected $fillable = ['category_name','category_icon'];
-    public function myproduct()
+    public function my_product()
     {
         return $this->hasMany(Product::class);
     }
