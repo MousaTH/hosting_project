@@ -24,7 +24,7 @@ class AuthController extends Controller{
             'last_name' => $Data['last_name'],
             // 'name' => $Data['name'],
             'email' => $Data['email'],
-            'password' => $Data['password'],
+            'password' => Hash::make($Data['password']),
             'phone_number' => $Data['phone_number']
         ]);
 
