@@ -11,8 +11,8 @@ Route::resource('/categories',CategoryController::class);
 
 
 Route::post('/register',[AuthController::class , 'register']);
-Route::post('/login',[AuthController::class ,'login']);
-Route::post('/logout',[AuthController::class ,'logout'])->middleware('auth:sanctum');
+Route::post('/login',[AuthController::class ,'login'])->name('login');
+Route::post('/logout',[AuthController::class ,'logout'])->middleware('auth:sanctum')->name('logout');
 
 Route::get("/test",function (Request $request){
     return "api is working fine fuck adnan rap3";
