@@ -20,4 +20,4 @@ Route::get("/test",function (Request $request){
 Route::get("/profile",function (Request $request){
     //only authenticated user can access this api
 return response()->json(['msg'=>'nice you are authinticated']);
-})->middleware('auth:api');
+})->middleware('auth');
