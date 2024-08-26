@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller{
@@ -61,7 +62,8 @@ class AuthController extends Controller{
         return response()->json([
             'access_token' => $token,
             'user'=>$user,
-            'token_type' => 'Bearer'
+            'token_type' => 'Bearer',
+            'auth type: ' => Auth::user(),
         ]);
     }
 

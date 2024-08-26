@@ -105,4 +105,12 @@ class ProductController extends Controller
         $product = Product::with('categories')->get();
         return view('showProduct',compact('product'));
     }
+    /* * * * * * * * * * * * * * * * *
+     * ASSOCIATE WITH USER FUNCTION **
+     * * * **  ** * * * * * * * * * **
+     * */
+//    public function associateProduct(Request $request){
+//        $user = AuthController::user();
+//        $product = Product::findOrFail();
+//    }
 }
