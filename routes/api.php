@@ -17,3 +17,7 @@ Route::post('/logout',[AuthController::class ,'logout'])->middleware('auth:sanct
 Route::get("/test",function (Request $request){
     return "api is working fine fuck adnan rap3";
 });
+Route::get("/profile",function (Request $request){
+    //only authenticated user can access this api
+return response()->json(['msg'=>'nice you are authinticated']);
+})->middleware('auth:api');
