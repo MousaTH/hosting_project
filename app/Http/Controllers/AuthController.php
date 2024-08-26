@@ -62,9 +62,6 @@ class AuthController extends Controller{
         return response()->json([
             'access_token' => $token,
             'user'=>$user,
-            'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'phone_number' => $user->phone_number,
             'token_type' => 'Bearer',
             'auth type: ' => Auth::user(),
         ]);
