@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     /**
@@ -70,7 +70,19 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function destroy($id)
+{
+    $product = Product::find($id);
 
+    if (!$product) {
+        return response()->json(['message' => 'Product not found'], 404);
+    }
+
+    // Delete the product
+    $product->delete();
+
+    return response()->json(['message' => 'Product deleted successfully'], 200);
+}
     /*
      * for api CRUD operation
      *

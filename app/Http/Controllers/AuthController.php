@@ -14,11 +14,16 @@ class AuthController extends Controller{
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             // 'name' => 'required|string',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-            'phone_number'=> 'nullable|string|max:10'
+            'email' => 'required|string|email:rfc,dns|max:255|unique:users',
+            'password' => 'required|string|min:8',
+            'phone_number'=> 'nullable|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:20'
         ]);
-
+        if(! filter_var($Data['email'], FILTER_VALIDATE_EMAIL)){
+            return response()->json(['msg'=>'Invalid Email Address'],400);
+        }
+        if($Data['phone_number'] && !preg_match('/^([0-9\s\-\+\(\)]*)$/',$Data['phone_number'])){
+            return response()->json(['msg'=>'Invalid Phone Number'],400);
+        }
         $user = User::create([
             'first_name' => $Data['first_name'],
             'last_name' => $Data['last_name'],
