@@ -66,6 +66,16 @@ class AuthController extends Controller{
             'auth type: ' => Auth::user(),
         ]);
     }
+    public function show(string $id)
+    {
+        if(Auth::user()->id !== $id){
+            return response()->json(['message'=>'Unauthorized'],401);
+        }
+        return response()->json(['user_name' => Auth::user()->first_name,
+                                    'email' => Auth::user()->email,
+                                    'phone_number'=> Auth::user()->phone_number
+    ]);
+    }
 
     public function logout(Request $request){
 
