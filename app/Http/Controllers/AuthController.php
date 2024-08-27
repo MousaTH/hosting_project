@@ -76,14 +76,14 @@ class AuthController extends Controller{
         return response()->json(['user_name' => Auth::user()->first_name,
                                     'email' => Auth::user()->email,
                                     'phone_number'=> Auth::user()->phone_number,
-                                    ['user_product'=>[
-                                        'product_id'=>Product::class()->user_id,
-                                        'name_of_product'=>Product::class()->name_of_product,
-                                        'description_of_product'=>Product::class()->description_of_product,
-                                        'category'=>Product::class()->category,
-                                        'created_at'=>Product::class()->created_at,
-                                        'updated_at'=>Product::class()->updated_at
-                                    ]]
+                                    ['user_product'=>Product::where('user_id', Auth::id())->get()->map(function($product){
+                                        return [
+                                            'id'=>$product->id,
+                                            'name_of_product'=>$product->name_of_product,
+                                            'description_of_product'=>$product->description_of_product,
+                                            'image_of_product'=>$product->image_of_product
+                                        ];
+                                    })]
     ]);
     }
 
