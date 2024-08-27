@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FavoriteController;
 
 Route::resource('/categories',CategoryController::class);
 
@@ -24,4 +25,6 @@ return response()->json(['msg'=>'nice you are authinticated']);
 Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post('/logout',[AuthController::class ,'logout'])->middleware('auth:sanctum')->name('logout');
     Route::resource('/products',ProductController::class);
+    Route::post('/favorites/{product}',[FavoriteController::class,'toggleFavorite']);
+    Route::get('/favorites',[FavoriteController::class,'index']);
 });
