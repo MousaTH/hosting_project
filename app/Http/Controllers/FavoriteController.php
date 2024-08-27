@@ -11,12 +11,12 @@ class FavoriteController extends Controller
     public function toggleFavorite(Request $request,$productId){
         $user= Auth::user();
         $product = Product::findOrFail($productId);
-    if ( $user->favoriteProducts->where('product_id', $productId)->exists()) {
-        $user->favoriteProducts->detach($productId);
+    if ( $user->favoriteProducts()->where('product_id', $productId)->exists()) {
+        $user->favoriteProducts()->detach($productId);
         $is_favou = false;
         return response()->json(['message' => 'Product removed from favorite list'],200);
     }else{
-        $user->favoriteProducts->attach($productId);
+        $user->favoriteProducts()->attach($productId);
         $is_favou = true;
         return response()->json(['message' => 'Product added to favorite list'],200);
     }
