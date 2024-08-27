@@ -66,7 +66,7 @@ class AuthController extends Controller{
             'auth type: ' => Auth::user(),
         ]);
     }
-    public function show(string $id)
+    public function show($id)
     {
         if(Auth::user()->id !== $id){
 
