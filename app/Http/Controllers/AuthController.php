@@ -68,7 +68,8 @@ class AuthController extends Controller{
     }
     public function show($id)
     {
-        if(Auth::user()->id !== $id){
+        $user_id = (string) Auth::user()->id;
+        if($user_id !== $id){
 
             return response()->json(['message'=>'Unauthorized','user id ' =>Auth::user()->id,'head id: ' =>$id ],401);
         }
