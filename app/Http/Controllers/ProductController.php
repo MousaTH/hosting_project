@@ -7,7 +7,6 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-
 class ProductController extends Controller
 {
     /**
@@ -32,10 +31,16 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name_of_product' => 'required|string|max:255',
             'description_of_product' => 'nullable|string',
-            'user_id' => Auth::user()->id,
             'categories_id' =>'required|numeric',
         ]);
-        $product = Product::create($validated);
+        $user = Auth::user();
+        $validated['user_id'] = (string) $user->id;
+        $product = Product::create([
+            'name_of_product' => $validated['name_of_product'],
+            'description_of_product' => $validated['description_of_product'],
+            'user_id' => Auth::user()->id,
+            'categories_id' => $validated['categories_id']
+        ]);
         return response()->json($product);
     }
 //23101976
