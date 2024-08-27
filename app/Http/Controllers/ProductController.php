@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::where('user_id',Auth::user()->id);
         return response ()->json($products);
 
     }
@@ -32,15 +32,9 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name_of_product' => 'required|string|max:255',
             'description_of_product' => 'nullable|string',
-            //  'image_of_product' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'user_id' => Auth::user()->id,
             'categories_id' =>'required|numeric',
         ]);
-//        if ($request->hasFile('image')) {
-//            $imagePath = $request->file('image')->store('products', 'public');
-//            $validated['image_of_product'] = $imagePath;
-//        }else{
-//            $validated['image_of_product'] = null;
-//        }
         $product = Product::create($validated);
         return response()->json($product);
     }
