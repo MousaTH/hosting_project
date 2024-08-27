@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use App\Models\Product;
 class AuthController extends Controller{
 
     public function register(Request $request){
@@ -75,7 +75,15 @@ class AuthController extends Controller{
         }
         return response()->json(['user_name' => Auth::user()->first_name,
                                     'email' => Auth::user()->email,
-                                    'phone_number'=> Auth::user()->phone_number
+                                    'phone_number'=> Auth::user()->phone_number,
+                                    ['user_product'=>[
+                                        'product_id'=>Product::class()->user_id,
+                                        'name_of_product'=>Product::class()->name_of_product,
+                                        'description_of_product'=>Product::class()->description_of_product,
+                                        'category'=>Product::class()->category,
+                                        'created_at'=>Product::class()->created_at,
+                                        'updated_at'=>Product::class()->updated_at
+                                    ]]
     ]);
     }
 
