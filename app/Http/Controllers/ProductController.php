@@ -19,9 +19,8 @@ class ProductController extends Controller
             return [
                 'product-title' => $product->name_of_product,
                 'product-description' => $product->description_of_product,
-                'category-name' => Category::where('categories_id',Category::all('id'))->get()->map(function ($category) {
-                    return $category->name_of_category;
-                }),
+                'category-name' => $product->category ? $product->category->name_of_category : null,
+                'category-id' => $product->categories_id,
                 'product-id' => $product->id,
                 'user-id' => $product->user_id,
             ];
