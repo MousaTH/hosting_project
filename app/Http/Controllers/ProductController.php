@@ -15,8 +15,12 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-       
-        return response ()->json($products);
+       $formated_data = Product::all()->map(function ($product) {
+        return [
+            'product_title' =>  $product->name_of_product
+        ];
+       });
+        return response ()->json($formated_data);
 
     }
     public function create(){
