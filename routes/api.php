@@ -21,7 +21,7 @@ Route::get("/profile",function (Request $request){
     //only authenticated user can access this api
 return response()->json(['msg'=>'nice you are authinticated']);
 })->middleware('auth');
-
+Route::get('/productShow',[ProductController::class,'index']);
 Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post('/logout',[AuthController::class ,'logout'])->middleware('auth:sanctum')->name('logout');
     Route::resource('/products',ProductController::class);
