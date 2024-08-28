@@ -19,7 +19,7 @@ class ProductController extends Controller
             return [
                 'product-title' => $product->name_of_product,
                 'product-description' => $product->description_of_product,
-                'category-name' => Category::where('categories_id',Category::id())->get()->map(function ($category) {
+                'category-name' => Category::where('categories_id',Category::all('id'))->get()->map(function ($category) {
                     return $category->name_of_category;
                 }),
                 'product-id' => $product->id,
@@ -31,7 +31,7 @@ class ProductController extends Controller
     }
     public function create(){
         $categories = Category::all();
-        return view('home',compact('category'));
+        return view('home',compact('categories'));
     }
     /**
      * Store a newly created resource in storage.
