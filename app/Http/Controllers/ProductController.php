@@ -17,7 +17,11 @@ class ProductController extends Controller
         $products = Product::all();
        $formated_data = Product::all()->map(function ($product) {
         return [
-            'product_title' =>  $product->name_of_product
+            'product_title' =>  $product->name_of_product,
+            'description' => $product->description_of_product,
+            'category_name' => $product->category->category_name,
+            'created_at' => $product->created_at->diffForHumans(),
+            'updated_at' => $product->updated_at->diffForHumans(),
         ];
        });
         return response ()->json($formated_data);
