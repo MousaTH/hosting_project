@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+
 class ProductController extends Controller
 {
     /**
@@ -20,6 +22,7 @@ class ProductController extends Controller
             'product_title' =>  $product->name_of_product,
             'description' => $product->description_of_product,
             //'category_name' => $product->category->category_name,
+            'posted_by'=>User::where('id', $product->user_id)->get('first_name'),
             'category_id'=>$product->categories_id,
             'category_data'=>Category::where('id', $product->categories_id)->get('category_name'),
             'created_at' => $product->created_at->diffForHumans(),
