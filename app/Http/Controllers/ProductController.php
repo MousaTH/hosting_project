@@ -19,7 +19,7 @@ class ProductController extends Controller
             return [
                 'product-title' => $product->name_of_product,
                 'product-description' => $product->description_of_product,
-                'category-name' => $product->category ? $product->category->name_of_category : null,
+                'category-name' => $product->category->category_name,
                 'category-id' => $product->categories_id,
                 'product-id' => $product->id,
                 'user-id' => $product->user_id,
