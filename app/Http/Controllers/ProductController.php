@@ -14,8 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-       $formated_data = Product::all()->map(function ($product) {
+        $products = Product::with('category')->get();
+       $formated_data = $products->map(function ($product) {
         return [
             'product_title' =>  $product->name_of_product,
             'description' => $product->description_of_product,
