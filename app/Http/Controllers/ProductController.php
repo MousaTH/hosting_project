@@ -19,7 +19,8 @@ class ProductController extends Controller
         return [
             'product_title' =>  $product->name_of_product,
             'description' => $product->description_of_product,
-            'category_name' => $product->category->category_name,
+            //'category_name' => $product->category->category_name,
+            'category_id'=>$product->category_id,
             'created_at' => $product->created_at->diffForHumans(),
             'updated_at' => $product->updated_at->diffForHumans(),
         ];
