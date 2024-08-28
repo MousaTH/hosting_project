@@ -14,14 +14,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category')->where('categories_id',Category::get('id'));
+        $products = Product::with('category')->get();
        $formated_data = $products->map(function ($product) {
         return [
             'product_title' =>  $product->name_of_product,
             'description' => $product->description_of_product,
             //'category_name' => $product->category->category_name,
             'category_id'=>$product->categories_id,
-            'category_data'=>$product->category_name,
+            'category_data'=>$product->category_name->where('categories_id',Category::get('id')),
             'created_at' => $product->created_at->diffForHumans(),
             'updated_at' => $product->updated_at->diffForHumans(),
         ];
