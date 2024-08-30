@@ -76,7 +76,7 @@ class AuthController extends Controller{
         return response()->json(['user_name' => Auth::user()->first_name,
                                     'email' => Auth::user()->email,
                                     'phone_number'=> Auth::user()->phone_number,
-                                    ['user_product'=>Product::where('user_id', Auth::id())->get()->map(function($product){
+                                    "my product"=>['user_product'=>Product::where('user_id', Auth::id())->get()->map(function($product){
                                         return [
                                             'id'=>$product->id,
                                             'name_of_product'=>$product->name_of_product,
