@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,8 +15,16 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categ = Category::all();
-        return response()->json($categ);
+        $categories = Category::with('myproduct')->get();
+        $formated_data = $categories->map(function ($categ) {
+            return [
+                'id' =>$categ->id,
+                'category_name' =>  $categ->category_name,
+                //'category_name' => $product->category->category_name,
+                'product_belong_to'=>Product::where('categories_id', $categ->id)->get('name_of_product'),
+            ];
+           });
+        return response()->json($formated_data);
     }
 
 
