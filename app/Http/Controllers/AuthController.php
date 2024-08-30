@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Product;
+use App\Models\Category;
 class AuthController extends Controller{
 
     public function register(Request $request){
@@ -81,6 +82,7 @@ class AuthController extends Controller{
                                             'id'=>$product->id,
                                             'name_of_product'=>$product->name_of_product,
                                             'description_of_product'=>$product->description_of_product,
+                                            'category_data'=>Category::where('id', $product->categories_id)->get('category_name'),
                                             'image_of_product'=>$product->image_of_product
                                         ];
                                     }),]);
