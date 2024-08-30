@@ -15,17 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('myproduct')->get();
-        $formated_data = $categories->map(function ($categ) {
-            return [
-                'id' =>$categ->id,
-                
-                'category_name' =>  $categ->category_name,
-                //'category_name' => $product->category->category_name,
-                'product_belong_to'=>Product::where('categories_id', $categ->id)->get(['name_of_product','description_of_product']),
-            ];
-           });
-        return response()->json($formated_data);
+      $categ = Category::all();
+        return response()->json($categ);
     }
 
 
