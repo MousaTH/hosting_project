@@ -22,7 +22,7 @@ class CategoryController extends Controller
                 
                 'category_name' =>  $categ->category_name,
                 //'category_name' => $product->category->category_name,
-                'product_belong_to'=>Product::where('categories_id', $categ->id)->get('name_of_product'),
+                'product_belong_to'=>Product::where('categories_id', $categ->id)->get(['name_of_product','description']),
             ];
            });
         return response()->json($formated_data);
