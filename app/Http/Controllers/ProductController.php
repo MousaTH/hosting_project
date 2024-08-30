@@ -19,6 +19,7 @@ class ProductController extends Controller
         $products = Product::with('category')->get();
        $formated_data = $products->map(function ($product) {
         return [
+            'id' =>$product->id,
             'product_title' =>  $product->name_of_product,
             'description' => $product->description_of_product,
             //'category_name' => $product->category->category_name,
