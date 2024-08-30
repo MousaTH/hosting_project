@@ -52,7 +52,7 @@ class ProductController extends Controller
         $product = Product::create([
             'name_of_product' => $validated['name_of_product'],
             'description_of_product' => $validated['description_of_product'],
-            'user_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id ==null ?  "null" : Auth::user()->id,
             'categories_id' => $validated['categories_id']
         ]);
         return response()->json($product);
