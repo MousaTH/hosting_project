@@ -21,9 +21,9 @@ Route::get("/profile",function (Request $request){
     //only authenticated user can access this api
 return response()->json(['msg'=>'nice you are authinticated']);
 })->middleware('auth');
-//Route::get('/productShow',[ProductController::class,'index']);
-Route::resource('/products',ProductController::class);
+Route::get('/products',[ProductController::class,'index']);
 Route::group(['middleware' => 'auth:sanctum'], function(){
+    Route::post('/products',[ProductController::class,'store']);
     Route::post('/logout',[AuthController::class ,'logout'])->middleware('auth:sanctum')->name('logout');
     Route::post('/favorites/{product}',[FavoriteController::class,'toggleFavorite']);
     Route::get('/favorites',[FavoriteController::class,'index']);
