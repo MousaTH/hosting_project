@@ -17,6 +17,7 @@ Route::post('/login',[AuthController::class ,'login'])->name('login');
 Route::get("/test",function (Request $request){
     return "api is working fine fuck adnan rap3";
 });
+Route::get('/productShow',[ProductController::class,'index']);
 Route::get("/profile",function (Request $request){
     //only authenticated user can access this api
 return response()->json(['msg'=>'nice you are authinticated']);
