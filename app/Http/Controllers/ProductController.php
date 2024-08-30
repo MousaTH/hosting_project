@@ -16,22 +16,19 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['category', 'user'])->get();
+        $products = Product::with('category')->get();
        $formated_data = $products->map(function ($product) {
         return [
             'id' =>$product->id,
             'product_title' =>  $product->name_of_product,
             'description' => $product->description_of_product,
             //'category_name' => $product->category->category_name,
-            'posted_by'=> ['first_name' => $product->user->first_name],
+            'posted_by'=>User::where('id', $product->user_id)->get('first_name'),
             'category_id'=>$product->categories_id,
-            'category_data'=>[
-                ['category_name' => $product->category->category_name]
-            ],
+            'category_data'=>Category::where('id', $product->categories_id)->get('category_name'),
             'created_at' => $product->created_at->diffForHumans(),
             'updated_at' => $product->updated_at->diffForHumans(),
-        ];
-       });
+        ];});
         return response ()->json($formated_data);
 
     }
