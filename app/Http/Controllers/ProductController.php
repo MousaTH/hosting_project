@@ -48,6 +48,11 @@ class ProductController extends Controller
             'categories_id' =>'required|numeric',
         ]);
         $user = Auth::user();
+
+    if (!$user) {
+        return response()->json(['message' => 'User not authenticated'], 401);
+    }
+    $validated['user_id'] = $user->id;
         $validated['user_id'] = (string) $user->id;
         $product = Product::create([
             'name_of_product' => $validated['name_of_product'],
