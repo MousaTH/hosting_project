@@ -24,6 +24,7 @@ class ProductController extends Controller
             'description' => $product->description_of_product,
             //'category_name' => $product->category->category_name,
             'posted_by'=>User::where('id', $product->user_id)->get('first_name'),
+            'phone_number'=>User::where('id', $product->user_id)->get('phone_number'),
             'category_id'=>$product->categories_id,
             'category_data'=>Category::where('id', $product->categories_id)->get('category_name'),
             'created_at' => $product->created_at->diffForHumans(),
